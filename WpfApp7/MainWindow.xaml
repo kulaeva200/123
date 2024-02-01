@@ -1,0 +1,87 @@
+﻿<Window x:Class="WpfApp7.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp7"
+        mc:Ignorable="d"
+        Title="Профсоюз" Height="450" Width="800" Icon="/Без названия.png">
+    <Grid>
+        <Menu>
+            <MenuItem Header="Добавить">
+                <MenuItem Header="Добавить студента"/>
+                <MenuItem Header="Добавить в санаторий"/>
+                <MenuItem Header="Добавить оплату"/>
+                <MenuItem Header="Добавить период оплат"/>
+                <MenuItem Header="Добавить факультет"/>
+                <MenuItem Header="Добавить группу"/>
+                          
+
+            </MenuItem>
+            <MenuItem Header="Отчеты">
+            </MenuItem>
+            <Menu/>
+        </Menu>
+
+        <TabControl Margin="0,22,0,0">
+            <TabItem Header="Информация о студентах">
+  
+                    <Grid>
+                       
+                        <ListView ItemsSource="{Binding Students}">
+                            <ListView.View>
+                                <GridView>
+                                <GridViewColumn Header="id" DisplayMemberBinding="{Binding 	id_student}"/>
+                                    <GridViewColumn Header="ФИО" DisplayMemberBinding="{Binding fio}"/>
+                                <GridViewColumn Header="День рождения" DisplayMemberBinding="{Binding date_birth}"/>
+
+
+                                <GridViewColumn Header="Образование" DisplayMemberBinding="{Binding obrazovanie}"/>
+                                <GridViewColumn Header="Адрес" DisplayMemberBinding="{Binding adres}"/>
+                                <GridViewColumn Header="Телефон" DisplayMemberBinding="{Binding telephone}"/>
+
+                                <GridViewColumn Header="Номер билета" DisplayMemberBinding="{Binding Nbileta}"/>
+                                <GridViewColumn Header="Код группы" DisplayMemberBinding="{Binding id_group}"/>
+                                <GridViewColumn Header="Прочая информация" DisplayMemberBinding="{Binding other_info}"/>
+                            </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                </TabItem>
+            
+
+            <TabItem Header="Санаторий">
+                <Grid>
+                    <DataGrid ItemsSource="{Binding Sanatoriums}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Код путевки" Binding="{Binding id_putevki}"/>
+                            <DataGridTextColumn Header="Номер билета" Binding="{Binding Nbileta}"/>
+                            <DataGridTextColumn Header="Номер заезда" Binding="{Binding Nzaezda}"/>
+                            <DataGridTextColumn Header="Год заезда" Binding="{Binding god}"/>
+                            <DataGridTextColumn Header="Начало заезда" Binding="{Binding nachalo_zaezda}"/>
+                            <DataGridTextColumn Header="Конец заезда" Binding="{Binding konec_zaezda}"/>
+                            <DataGridTextColumn Header="Статус оплаты путевки" Binding="{Binding status_oplaty}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Оплаты">
+                <Grid>
+                    <TreeView ItemsSource="{Binding Payments}">
+                        <TreeView.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding Details}">
+                                <TextBlock Text="{Binding Title}"/>
+                                <HierarchicalDataTemplate.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Detail}"/>
+                                    </DataTemplate>
+                                </HierarchicalDataTemplate.ItemTemplate>
+                            </HierarchicalDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
